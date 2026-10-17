@@ -1,0 +1,350 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="BookStoreWebForms.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%: Page.Title %> | Haseen Books Store</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <style>
+        :root {
+            --book-primary: #2563eb;
+            --book-primary-dark: #1d4ed8;
+            --book-light: #eff6ff;
+            --book-text: #1e293b;
+            --book-muted: #64748b;
+            --book-border: #e2e8f0;
+            --book-white: #ffffff;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8fafc;
+            color: var(--book-text);
+            font-family: "Segoe UI", Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Main navigation */
+        .book-navbar {
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--book-border);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+            padding: 12px 0;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .book-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            color: var(--book-text) !important;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .book-brand:hover {
+            color: var(--book-primary) !important;
+        }
+
+        .book-brand-icon {
+            display: inline-flex;
+            width: 43px;
+            height: 43px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff;
+            font-size: 23px;
+            box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .book-brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .book-brand-subtitle {
+            margin-top: 4px;
+            color: var(--book-muted);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .book-navbar .navbar-nav {
+            gap: 5px;
+        }
+
+        .book-navbar .nav-link {
+            padding: 10px 15px !important;
+            border-radius: 9px;
+            color: #475569 !important;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .book-navbar .nav-link:hover,
+        .book-navbar .nav-link:focus {
+            background-color: var(--book-light);
+            color: var(--book-primary) !important;
+        }
+
+        .book-navbar .nav-link:focus-visible,
+        .book-brand:focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.35);
+            outline-offset: 3px;
+        }
+
+        .book-navbar .navbar-toggler {
+            border: 1px solid var(--book-border);
+            border-radius: 10px;
+            padding: 8px 11px;
+        }
+
+        .book-navbar .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Page content */
+        .book-body-content {
+            width: 100%;
+            flex: 1 0 auto;
+            padding-top: 32px;
+            padding-bottom: 42px;
+        }
+
+        /* Footer */
+        .book-footer {
+            margin-top: auto;
+            padding: 25px 0;
+            background: #ffffff;
+            border-top: 1px solid var(--book-border);
+        }
+
+        .book-footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .book-footer-brand {
+            margin: 0;
+            color: var(--book-text);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .book-footer-copy {
+            margin: 3px 0 0;
+            color: var(--book-muted);
+            font-size: 0.85rem;
+        }
+
+        .book-footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .book-footer-links a {
+            color: var(--book-muted);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .book-footer-links a:hover {
+            color: var(--book-primary);
+        }
+
+        @media (max-width: 575.98px) {
+            .book-navbar {
+                padding: 10px 0;
+            }
+
+            .book-brand {
+                font-size: 1.08rem;
+            }
+
+            .book-brand-icon {
+                width: 39px;
+                height: 39px;
+                font-size: 21px;
+            }
+
+            .book-navbar .navbar-collapse {
+                padding-top: 12px;
+            }
+
+            .book-navbar .nav-link {
+                padding: 10px 12px !important;
+            }
+
+            .book-body-content {
+                padding-top: 22px;
+                padding-bottom: 30px;
+            }
+
+            .book-footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form runat="server">
+
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%-- ASP.NET Web Forms framework scripts --%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web"
+                    Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+            </Scripts>
+        </asp:ScriptManager>
+
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg book-navbar">
+            <div class="container">
+
+                <a class="navbar-brand book-brand" runat="server" href="~/">
+                    <span class="book-brand-icon" aria-hidden="true">&#128214;</span>
+                    <span class="book-brand-text">
+                        <span>Haseen Books Store</span>
+                        <span class="book-brand-subtitle">Stories Worth Reading</span>
+                    </span>
+                </a>
+
+                <button type="button"
+                    class="navbar-toggler"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#bookNavbarContent"
+                    aria-controls="bookNavbarContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="bookNavbarContent">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Books.aspx">
+                                Browse Books
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Categories.aspx">
+                                Categories
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/About">
+                                About
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" runat="server" href="~/Contact">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Individual page content -->
+        <main class="container book-body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+        <!-- Footer -->
+        <footer class="book-footer">
+            <div class="container">
+                <div class="book-footer-inner">
+
+                    <div>
+                        <p class="book-footer-brand">Haseen Books Store</p>
+                        <p class="book-footer-copy">
+                            &copy; <%: DateTime.Now.Year %> Haseen Books Store.
+                            All rights reserved.
+                        </p>
+                    </div>
+
+                    <div class="book-footer-links">
+                        <a runat="server" href="~/">Home</a>
+                        <a runat="server" href="~/Books.aspx">Browse Books</a>
+                        <a runat="server" href="~/About">About</a>
+                        <a runat="server" href="~/Contact">Contact</a>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+    </form>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+
+</body>
+</html>
