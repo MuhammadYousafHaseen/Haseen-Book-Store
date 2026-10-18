@@ -17,7 +17,7 @@ namespace BookStoreWebForms.Models
         : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("BookStoreDB")
+            : base("DefaultConnection")
         {
         }
     }

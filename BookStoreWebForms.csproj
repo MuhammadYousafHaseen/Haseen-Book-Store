@@ -160,6 +160,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DatabaseTest.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditBook.aspx" />
     <Content Include="favicon.ico" />
@@ -302,6 +303,13 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseTest.aspx.cs">
+      <DependentUpon>DatabaseTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DatabaseTest.aspx.designer.cs">
+      <DependentUpon>DatabaseTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\BookService.cs" />
     <Compile Include="Data\CategoryService.cs" />
