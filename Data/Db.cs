@@ -9,7 +9,7 @@ namespace BookStoreWebForms.Data
         public static SqlConnection GetConnection()
         {
             string connectionString =
-                ConfigurationManager.ConnectionStrings["BookStoreDB"]
+                ConfigurationManager.ConnectionStrings["db74321"]
                     .ConnectionString;
 
             return new SqlConnection(connectionString);
